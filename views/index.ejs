@@ -5,18 +5,38 @@
   <title>Socket.IO chat</title>
   <link rel="stylesheet" href="/stylesheets/app.css">
 
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/javascripts/chat.js"></script>
 
 </head>
 <body>
+  <div class='introMessage'>Welcome to the Flying Push! You are competing against a foe for magic points. A phrase never before uttered by a living person will appear before you. You will have two seconds to accurately type the word out before it disappears and is replaced by another phrase. It's a race to 3 points. Good luck.</div>
+  <div class='wordFlash'></div>
   <ul id="messages"></ul>
+ <!--  <div class='centered'>centered</div> -->
+  <div class="yourPoints">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+  <div class="enemyPoints">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+
+  <div id='time'></div>
+  <div id='pointCount'></div>
   <form action="" id='messageForm'>
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
   <form action="" id='nameForm'>
-  	<input id='name-input'type="text" /><button>Name</button>
+    <input id='name-input'type="text" placeholder='what is your name' /><button>Name</button>
   </form>
-  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="/javascripts/chat.js"></script>
 </body>
+
+  <script>
+  
+  </script>
 </html>
