@@ -1,0 +1,21 @@
+{
+  "name": "flying_push",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "locus": "^1.2.0",
+    "method-override": "^2.3.5",
+    "morgan": "^1.7.0",
+    "parser": "^0.1.4"
+  }
+}
