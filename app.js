@@ -35,9 +35,9 @@ io.on('connection', function(socket){
     // eval(locus);
   })
 
-  socket.on('bagginsCL', function(){
-    console.log('received bagginsCL')
-    io.emit('bagginsSE')
+  socket.on('begin FROM CLIENT', function(){
+    console.log('received client begin');
+    io.emit('begin FROM SERVER');
   })
 
   socket.on('lvl1.1 FROM CLIENT', 
@@ -53,6 +53,14 @@ io.on('connection', function(socket){
   socket.on('lvl1.3 FROM CLIENT', function(){
     var data = getRandom(lvl1words);
     io.emit('lvl1.3 FROM SERVER', data)
+  })
+  socket.on('lvl1.4 FROM CLIENT', function(){
+    var data = getRandom(lvl1words);
+    io.emit('lvl1.4 FROM SERVER', data)
+  })
+  socket.on('lvl1.5 FROM CLIENT', function(){
+    var data = getRandom(lvl1words);
+    io.emit('lvl1.5 FROM SERVER', data)
   })
 
 });
