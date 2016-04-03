@@ -23,7 +23,9 @@ $(function() {
     var name = $('#name-input').val();
     $('#name-input').val('');
     $('#nameForm').hide();
-    socket.emit('enters name FROM CLIENT', name);
+    socket.emit('nameSubmit', name);
+    console.log('is thiS the beginning?')
+    debugger
   })
 
   $("#messageForm").on('submit', function(e) {
@@ -40,46 +42,39 @@ $(function() {
   // })
 
   socket.on('enters name FROM SERVER', function(name){
-    console.log(yourPoints)
+    console.log('received BEGIN from server');
     $('#m').focus();
-  	$('#messages').append('<li><strong>' + name + '</strong>' + " has entered!" + '</li>');
+    $('#messages').append('<li><strong>' + name + '</strong>' + " has entered!" + '</li>');
     $('.introMessage').hide(3300);
-    setTimeout(function() {
-      $('#messages').text('');
-      $('#messages').append('<li><strong>' + name + '</strong>' + ", are you ready?" + '</li>');
-              setTimeout(function() {
-                $('#messages').text('');
-                $('#messages').append('<li id="beginMessage"><strong>' + "BEGIN!" + '</strong>' + '</li>');
-                      setTimeout(function() {
-                         $('#beginMessage').hide(300);
-                         socket.emit('begin FROM CLIENT');
-                      }, 900);
-              }, 2000);
-    }, 2500);
-  })
+    socket.emit('bagginsCL');
+    
 
-  socket.on('begin FROM SERVER', function(e){
+  })
+  
+  socket.on('bagginsSE', function(e){
       function timedText() {
-    setTimeout(show1, 100);
-    setTimeout(show2, 7000);
-    setTimeout(show3, 14000);
+        console.log('start sequence')
+    setTimeout(show1(), 1000);
+    setTimeout(show2(), 12000);
+    setTimeout(show3(), 18000);
     // setTimeout(show4, 8000);
     // setTimeout(show5, 10000);
     // setTimeout(show6, 12000);
     // setTimeout(show7, 14000);
     }
 function show1() {
+  console.log('show1 begins' + (new Date()).toLocaleTimeString())
     socket.emit('lvl1.1 FROM CLIENT');
-    console.log(yourPoints)
 }
 socket.on('lvl1.1 FROM SERVER', function(data){
-    console.log(new Date().toLocaleTimeString())
+    console.log('LEVEL 1 Serverside')
+    console.log(data);
     $('.wordFlash').show(200);
     $('.wordFlash').text(data);
     setTimeout(function(){
     $('.wordFlash').text('');
     $('.wordFlash').hide(200);
-    },6000)
+    },5000)
 });
 socket.on('text input FROM SERVER', function(msg) {
     console.log(msg);
@@ -88,9 +83,7 @@ socket.on('text input FROM SERVER', function(msg) {
   
     if (msg === $('.wordFlash').text()){
       $('.yourPoints > div:first-child').css("background-color","green");
-      console.log('check1'+yourPoints)
       yourPoints+= 1;
-      console.log('check2'+yourPoints)
       $("#pointCount").html(yourPoints);
     }
   });
@@ -105,7 +98,7 @@ socket.on('lvl1.2 FROM SERVER', function(data){
     setTimeout(function(){
     $('.wordFlash').text('');
     $('.wordFlash').hide(200);
-    },6000)
+    },5000)
 });
 function show3() {
     socket.emit('lvl1.3 FROM CLIENT');
@@ -117,7 +110,7 @@ socket.on('lvl1.3 FROM SERVER', function(data){
     setTimeout(function(){
     $('.wordFlash').text('');
     $('.wordFlash').hide(200);
-    },6000)
+    },5000)
 });
     timedText();
     console.log('timeText called')

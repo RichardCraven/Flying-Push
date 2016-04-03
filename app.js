@@ -28,16 +28,22 @@ io.on('connection', function(socket){
     // eval(locus);
   });
 
-  socket.on('enters name FROM CLIENT', function(name){
+  socket.on('nameSubmit', function(name){
+    console.log('nameSubmit')
+
   	io.emit('enters name FROM SERVER', name)
+    // eval(locus);
   })
 
-  socket.on('begin FROM CLIENT', function(){
-    io.emit('begin FROM SERVER')
+  socket.on('bagginsCL', function(){
+    console.log('received bagginsCL')
+    io.emit('bagginsSE')
   })
 
-  socket.on('lvl1.1 FROM CLIENT', function(){
+  socket.on('lvl1.1 FROM CLIENT', 
+    function(){
     var data = getRandom(lvl1words);
+    console.log('rando =' +data)
     io.emit('lvl1.1 FROM SERVER', data)
   })
   socket.on('lvl1.2 FROM CLIENT', function(){
