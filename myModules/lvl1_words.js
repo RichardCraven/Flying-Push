@@ -1,5 +1,7 @@
 
+// var words = ['test'];
 
-var words = ["black asymptote","big dystopia","silent seeds","mom proportions","deep scarlett","irregular joe","rapid clap","odious nerves","reversible frown","solvent plans","makeshift pop","scrubadub","willy loman","most definitely"];
+
+var words = ["black asymptote","big dystopia","silent saplings","mom proportions!","deep scarlett","irregular joe","the rapid clap","nerves of zen","reversible frown","dissolvent plans?","makeshift popcorn","whiteowlfaces","willy loman","uh, yeah mos def",'banana bonanza','super shiny spicy',"bedazzled boot","fantastic possession",'corporations are people','courtney loves murder','plastic fedora','pickled: onions','pickled: radish','pickled: bananas','listener event','etsy is meh','disseminate logic','gandalf the gross','chicken cowboy','barbara dont play','nude racquetball','htmltcpip','dat purple drink','elephantitis','pickled: pickles','salty habitual','incredibly powerful','calif0rnia wine'];
 
 module.exports = words;

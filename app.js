@@ -6,6 +6,11 @@ var io = require('socket.io')(server);
 var users = [];
 
 var lvl1words = require('./myModules/lvl1_words');
+var lvl2words = require('./myModules/lvl2_words');
+var player1 = false
+var player2 = false
+var start = false
+
 
 function getRandom(arr){
   return arr[Math.floor(Math.random()*arr.length)];
@@ -23,17 +28,47 @@ io.on('connection', function(socket){
   // io.emit('login message', login);
   // var userName = prompt("What is your name?");
   // io.emit('name', userName);
-  socket.on('text input FROM CLIENT', function(msg){
-    io.emit('text input FROM SERVER', msg); //io.emit emits to all clients, socket.emit emits only to 1 client
-    // eval(locus);
-  });
 
   socket.on('nameSubmit', function(name){
-    console.log('nameSubmit')
-
-  	io.emit('enters name FROM SERVER', name)
+    console.log(socket.id)
+    var user = {};
+    user.name = name;
+    user.id = socket.id
+    if (player1 === false){
+      user.player = 1;
+      player1 = true;
+      users.push(user);
+      io.sockets.connected[users[0].id].emit("start sequence message 1 FROM SERVER", name);
+      // io.sockets.connected[users[1].id].emit("start sequence message 2 FROM SERVER", name);
+    }
+    else if (player1 ===true && player2 === false){
+      user.player = 2;
+      player2 = true;
+      users.push(user);
+      io.sockets.connected[users[1].id].emit("start sequence message 2 FROM SERVER", name);
+      io.sockets.connected[users[0].id].emit("start sequence message 2 FROM SERVER", name);
+      }
     // eval(locus);
+
+    // else if (player1 ===true && player2 ===true){
+    //   alert('sorry, this game only supports 2 players')
+    // }
   })
+  socket.on('final begin CLIENT', function(){
+    console.log('received client begin');
+  
+    if (socket.id === users[0].id){
+    var name = users[0].name;
+    io.sockets.connected[users[0].id].emit('start sequence final FROM SERVER', name)
+    console.log('shit')
+    }
+    else if (socket.id === users[1].id){
+    var name = users[1].name;
+    io.sockets.connected[users[1].id].emit('start sequence final FROM SERVER', name)
+    console.log('2');
+    }
+  })
+
 
   socket.on('begin FROM CLIENT', function(){
     console.log('received client begin');
@@ -46,23 +81,33 @@ io.on('connection', function(socket){
     console.log('rando =' +data)
     io.emit('lvl1.1 FROM SERVER', data)
   })
-  socket.on('lvl1.2 FROM CLIENT', function(){
-    var data = getRandom(lvl1words);
-    io.emit('lvl1.2 FROM SERVER', data)
-  })
-  socket.on('lvl1.3 FROM CLIENT', function(){
-    var data = getRandom(lvl1words);
-    io.emit('lvl1.3 FROM SERVER', data)
-  })
-  socket.on('lvl1.4 FROM CLIENT', function(){
-    var data = getRandom(lvl1words);
-    io.emit('lvl1.4 FROM SERVER', data)
-  })
-  socket.on('lvl1.5 FROM CLIENT', function(){
-    var data = getRandom(lvl1words);
-    io.emit('lvl1.5 FROM SERVER', data)
-  })
 
+  socket.on('input FROM CLIENT', function(msg){
+    if (socket.id === users[0].id){
+    io.sockets.connected[users[0].id].emit('hit check', msg)
+    }
+    else if (socket.id === users[1].id){
+    io.sockets.connected[users[1].id].emit('hit check', msg)
+    }
+  });
+  socket.on('I hit', function(){
+    if (socket.id === users[0].id){
+    io.sockets.connected[users[1].id].emit('they hit')
+    }
+    else if (socket.id === users[1].id){
+    io.sockets.connected[users[0].id].emit('they hit')
+    }
+  });
+  socket.on('stopGame', function(){
+    if (socket.id === users[0].id){
+    io.sockets.connected[users[0].id].emit('winMessage', users[0].name);
+    io.sockets.connected[users[1].id].emit('loseMessage', users[1].name)
+    }
+    else if (socket.id === users[1].id){
+    io.sockets.connected[users[1].id].emit('winMessage', users[1].name);
+    io.sockets.connected[users[0].id].emit('loseMessage', users[0].name)
+    }
+  })
 });
 
     function startTime() {
