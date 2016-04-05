@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Socket.IO chat</title>
+  <title>Flying-Push</title>
   <link rel="stylesheet" href="/stylesheets/app.css">
 
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -32,12 +32,13 @@
     <div class="point6b"></div>
   </div>
   <div class="buttonContainer">
-      <button class='levelButtons' type="button">Level 1</button>
-      <button class='levelButtons' type="button">Level 2</button>
-      <button class='levelButtons' type="button">Level 3</button>
+      <button class='levelButtons' id="level1" type="button">Level 1</button>
+      <button class='levelButtons' id="level2" type="button">Level 2</button>
+      <button class='levelButtons' id="levelNames" type="button">Names</button>
     
   </div>
   <div id='time'></div>
+  <button class='ready' type="button">Ready!</button>
 
   <!-- <div id='pointCount'></div> -->
   <form action="" id='messageForm'>

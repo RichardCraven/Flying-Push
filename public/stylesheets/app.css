@@ -24,7 +24,7 @@ body {
   top: 50%;
   bottom: -200px;
   position: relative;
-
+  left: 80px;
 }
 .yourPoints>div {
   float: left;
@@ -43,6 +43,7 @@ body {
   border: 1.3px solid black;
   border-radius: 100%;
   margin: 30px;
+
 }
 #time{
 	height: 40px;
@@ -67,18 +68,28 @@ body {
 }
 .buttonContainer{
    height:30px;
-  width: 90px;
-  float:right;
+  width: 102px;
   right: 70px;
   bottom:50px;
+  position: absolute;
 }
 .buttonContainer > .levelButtons{
-  position: fixed;
   height:30px;
   width: 30px;
-  float:right;
-  right: 70px;
-  bottom:50px;
+  opacity: 0.5;
+}
+.selected{
+  background-color:red;
+}
+
+.ready {
+  height:50px;
+  width: 140px;
+  top: 130px;
+  left:16px;
+  position: absolute;
+  background-color: #8FBC8F;
+  font-size: 1.8em;
   opacity: 0.5;
 }
 

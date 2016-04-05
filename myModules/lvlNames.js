@@ -1,0 +1,3 @@
+var wordsNames = ['charlie yang','gunther schneider','kinga rutynowski','kyle malfatti','kyle peacock','nic higuera','richard craven','wretched richard', 'rick budzak','sara jay','steve mclaughlin','troy enns','terrific troy','aaron harms','alex chang','andrew furth','andrew nguyen','chris chang','christina jensen','elie schoppik','fabulous forrest','hamlet tamazian','janey keig','jeff paterson','katie low','kind kate','matt lane','parker lewis','tom obrien','radical rick','neurotic nick']
+
+module.exports = wordsNames;

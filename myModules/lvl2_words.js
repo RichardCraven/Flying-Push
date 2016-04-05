@@ -1,3 +1,3 @@
-var words2 = ['!t3kn by lizardpeople','ozstriche farmr','mythical coffee giant sighting','s0ak3d in t3pid','dang son, just   dang', 'tubmuffin pr0spector', 'i saw the potatoe. k?','0ld man minnes0tta','resht hish shoul','unadjacent severances',"moletown's just yonder",'sergeant saltine'];
+var words2 = ['taken by lizardpeople','ostrich farmer','mythical coffee giant','selled in tepid','dang son, just dang', 'tubby homegrown', 'i saw the potatoe. k?','old man minnesotta','resht hish shoul','adjacent severances',"moletowns just yonder",'sergeant saltine','bonobos in the trees'];
 
 module.exports = words2;

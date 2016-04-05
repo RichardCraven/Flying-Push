@@ -7,6 +7,7 @@ var users = [];
 
 var lvl1words = require('./myModules/lvl1_words');
 var lvl2words = require('./myModules/lvl2_words');
+var lvlNames = require('./myModules/lvlNames');
 var player1 = false
 var player2 = false
 var start = false
@@ -54,32 +55,64 @@ io.on('connection', function(socket){
     //   alert('sorry, this game only supports 2 players')
     // }
   })
-  socket.on('final begin CLIENT', function(){
-    console.log('received client begin');
-  
-    if (socket.id === users[0].id){
-    var name = users[0].name;
-    io.sockets.connected[users[0].id].emit('start sequence final FROM SERVER', name)
-    console.log('shit')
-    }
-    else if (socket.id === users[1].id){
-    var name = users[1].name;
-    io.sockets.connected[users[1].id].emit('start sequence final FROM SERVER', name)
-    console.log('2');
-    }
+  socket.on('Im ready', function(){
+    io.emit('ready check');
   })
-
+  socket.on('final begin CLIENT', function(){
+    io.emit('start sequence final FROM SERVER');
+  })
 
   socket.on('begin FROM CLIENT', function(){
     console.log('received client begin');
     io.emit('begin FROM SERVER');
   })
 
-  socket.on('lvl1.1 FROM CLIENT', 
+  socket.on('lvl1Activated', function(){
+    if (socket.id === users[0].id){
+    var name = users[0].name;
+    io.emit('level1 change', name)
+    }
+    else if (socket.id === users[1].id){
+    var name = users[1].name;
+    io.emit('level1 change', name)
+    }
+  })
+  socket.on('lvl2Activated', function(){
+    if (socket.id === users[0].id){
+    var name = users[0].name;
+    io.emit('level2 change', name)
+    }
+    else if (socket.id === users[1].id){
+    var name = users[1].name;
+    io.emit('level2 change', name)
+    }
+  })
+  socket.on('lvlNamesActivated', function(){
+    if (socket.id === users[0].id){
+    var name = users[0].name;
+    io.emit('levelNames change', name)
+    }
+    else if (socket.id === users[1].id){
+    var name = users[1].name;
+    io.emit('levelNames change', name)
+    }
+  })
+
+
+  socket.on('begin FROM CLIENT-lvl1', 
     function(){
     var data = getRandom(lvl1words);
-    console.log('rando =' +data)
-    io.emit('lvl1.1 FROM SERVER', data)
+    io.emit('BEGIN game FROM SERVER', data)
+  })
+  socket.on('begin FROM CLIENT-lvl2', 
+    function(){
+    var data = getRandom(lvl2words);
+    io.emit('BEGIN game FROM SERVER', data)
+  })
+  socket.on('begin FROM CLIENT-names', 
+    function(){
+    var data = getRandom(lvlNames);
+    io.emit('BEGIN game FROM SERVER', data)
   })
 
   socket.on('input FROM CLIENT', function(msg){
