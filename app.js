@@ -101,18 +101,20 @@ io.on('connection', function(socket){
 
   socket.on('begin FROM CLIENT-lvl1', 
     function(){
+    console.log('1')
     var data = getRandom(lvl1words);
-    io.emit('BEGIN game FROM SERVER', data)
+    io.emit('BEGIN game FROM SERVER-lvl1', data)
   })
   socket.on('begin FROM CLIENT-lvl2', 
     function(){
+      console.log('2')
     var data = getRandom(lvl2words);
-    io.emit('BEGIN game FROM SERVER', data)
+    io.emit('BEGIN game FROM SERVER-lvl2', data)
   })
   socket.on('begin FROM CLIENT-names', 
     function(){
     var data = getRandom(lvlNames);
-    io.emit('BEGIN game FROM SERVER', data)
+    io.emit('BEGIN game FROM SERVER-names', data)
   })
 
   socket.on('input FROM CLIENT', function(msg){
@@ -166,8 +168,8 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-server.listen(3200, function() {
-  console.log('listening on 3200');
+server.listen(3100, function() {
+  console.log('listening on 3100');
 });
 
 module.exports = {

@@ -67,15 +67,15 @@ body {
 	right: 0px;
 }
 .buttonContainer{
-   height:30px;
-  width: 102px;
+  height:90px;
+  width: 250px;
   right: 70px;
   bottom:50px;
   position: absolute;
 }
 .buttonContainer > .levelButtons{
   height:30px;
-  width: 30px;
+  width: 60px;
   opacity: 0.5;
 }
 .selected{

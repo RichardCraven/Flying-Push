@@ -18,6 +18,7 @@ var registered = false;
 var ready1 = false;
 var ready2 = false;
 
+var wtfBEANS = false;
 var startgame1;
 var startgame2;
 var startgameNames;
@@ -27,21 +28,23 @@ var theirPoints = 0
 $("#pointCount").html(yourPoints);
 
 var startgame;
+
+//LEVEL BUTTONS
 $('#level1').on('click',function(e){
   e.preventDefault();
-  if (registered === true){
+  if (registered === true && wtfBEANS === false){
   socket.emit('lvl1Activated')
   };
 });
 $('#level2').on('click',function(e){
   e.preventDefault();
-  if (registered === true){
+  if (registered === true && wtfBEANS === false){
   socket.emit('lvl2Activated')
   };
 });
 $('#levelNames').on('click',function(e){
   e.preventDefault();
-  if (registered === true){
+  if (registered === true && wtfBEANS === false){
   socket.emit('lvlNamesActivated')
 };
 });
@@ -159,6 +162,7 @@ socket.on('ready check', function(){
 })
 
 socket.on('start sequence final FROM SERVER', function(name){
+    wtfBEANS = true;
     $('.ready').hide(300);
     $('#m').focus();
     $('#messages').text("...and......");
@@ -184,9 +188,11 @@ socket.on('start sequence final FROM SERVER', function(name){
     }, 2500);
 })
 function startGame1(){
+  console.log('funnction works 1')
 socket.emit('begin FROM CLIENT-lvl1');
 }
 function startGame2(){
+  console.log('funnction works 2')
 socket.emit('begin FROM CLIENT-lvl2');
 }
 function startGameNames(){
@@ -200,7 +206,25 @@ function stopGame(){
   clearInterval(startgameNames);
 }
 
-socket.on('BEGIN game FROM SERVER', function(data){
+socket.on('BEGIN game FROM SERVER-lvl1', function(data){
+  $('.wordFlash').show(200);
+  $('.wordFlash').text(data);
+  setTimeout(function(){
+  $('.wordFlash').text('');
+  $('.wordFlash').hide(200);
+  },4400)
+});
+
+socket.on('BEGIN game FROM SERVER-lvl2', function(data){
+  $('.wordFlash').show(200);
+  $('.wordFlash').text(data);
+  setTimeout(function(){
+  $('.wordFlash').text('');
+  $('.wordFlash').hide(200);
+  },3000)
+});
+
+socket.on('BEGIN game FROM SERVER-names', function(data){
   $('.wordFlash').show(200);
   $('.wordFlash').text(data);
   setTimeout(function(){
